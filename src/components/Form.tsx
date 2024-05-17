@@ -1,102 +1,21 @@
 
-import React, { useEffect, useState } from 'react';
-import Select, { GroupBase, OptionProps, SingleValueProps, StylesConfig, components } from 'react-select';
+
+
+
+import React from 'react';
 import RightArrow from '@assets/img/arrow.png';
 import Logo from '@assets/img/logo.png';
-import { fetchCountries, getUserCountry } from '~/services/CountryService';
-import { ICountryOption, IUserResponse } from '~/Types';
-import { DropdownIndicator } from './DropdownIndicator';
+import { CustomInputWithCountry } from './CustomInputWithCountry';
+import { IFormField } from '~/Types';
 
-interface IFormField { id: string, label: string, type: string, error?: string | null }
-
-/** Custom styles for the react-select dropdown */
-const customStyles: StylesConfig<ICountryOption, false, GroupBase<ICountryOption>> = {
-    control: (provided: any) => ({
-        ...provided,
-        border: '1px solid #B1B7D6',
-        borderRadius: '10px',
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: '10px',
-        minHeight: '56px',
-    }),
-    option: (provided: any) => ({
-        ...provided,
-        display: 'flex',
-        alignItems: 'center',
-        padding: '10px',
-    }),
-    singleValue: (provided: any) => ({
-        ...provided,
-        display: 'flex',
-        alignItems: 'center',
-    }),
-    indicatorsContainer: (provided: any) => ({
-        ...provided,
-        display: 'flex',
-        alignItems: 'center',
-    }),
-};
-
-/** Custom single value component to display the country name only */
-const SingleValue = (props: SingleValueProps<ICountryOption>) => (
-    <components.SingleValue {...props}>
-        <span>{props.data.label}</span>
-    </components.SingleValue>
-);
-
-/** Custom option component to display flag and country name in the dropdown */
-const Option = (props: OptionProps<ICountryOption>) => (
-    <components.Option {...props}>
-        <div className="flex items-center">
-            <img src={props.data.flag} alt={props.data.label} className="w-5 h-5 mr-2" />
-            <span>{props.data.label}</span>
-        </div>
-    </components.Option>
-);
 
 const Form: React.FC = () => {
     const formFields: IFormField[] = [
         { id: "first-name", label: "First name", type: "text", error: null },
         { id: "last-name", label: "Last name", type: "text", error: null },
-        { id: "b-name", label: "Business name and HQ location", type: "select", error: null },
         { id: "work-email", label: "Work email", type: "text", error: null },
         { id: "password", label: "Password", type: "password", error: "Password must be at least 12 characters" }
     ];
-
-    const [fields, _] = useState<IFormField[]>(formFields);
-    const [countries, setCountries] = useState<ICountryOption[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<ICountryOption | null>(null);
-
-    useEffect(() => {
-        const loadCountriesAndUserCountry = async () => {
-            try {
-                const countriesData = await fetchCountries();
-
-                const countryOptions = countriesData.map((country: any) => ({
-                    value: country.cca2,
-                    label: country.name.common,
-                    flag: country.flags.svg, 
-                    code: country.cca2,
-                }));
-
-                setCountries(countryOptions);
-
-                const userCountryResponse: IUserResponse = await getUserCountry();
-                const userCountryCode = userCountryResponse.country;
-                const userCountry = countryOptions.find((country) => country.code === userCountryCode);
-
-                if (userCountry) {
-                    setSelectedCountry(userCountry);
-                }
-
-            } catch (error) {
-                console.error('Error fetching countries or user location:', error);
-            }
-        };
-
-        loadCountriesAndUserCountry();
-    }, []);
 
     return (
         <div className="lg:w-1/2 w-full min-h-screen bg-[#F8F8FB] md:flex-row">
@@ -132,27 +51,18 @@ const Form: React.FC = () => {
                                 />
                             </div>
                         </div>
-                        {fields.slice(2).map(({ id, label, type, error }) => (
+                        <div className="flex flex-col space-y-1 ">
+                            <label htmlFor="business-name-location" className="text-base font-normal text-theme-gray leading-[20.83px]">Business name and HQ location</label>
+                            <CustomInputWithCountry />
+                        </div>
+                        {formFields.slice(2).map(({ id, label, type, error }) => (
                             <div className="flex flex-col space-y-1" key={id}>
                                 <label htmlFor={id} className="text-base font-normal text-theme-gray leading-[20.83px]">{label}</label>
-                                {type === 'select' && (
-                                    <Select
-                                        options={countries}
-                                        styles={customStyles}
-                                        components={{ SingleValue, Option, DropdownIndicator }}
-                                        value={selectedCountry}
-                                        onChange={(selectedOption) => setSelectedCountry(selectedOption as ICountryOption)}
-                                        placeholder="Select a country"
-                                        classNamePrefix="react-select"
-                                    />
-                                )}
-                                {(type === 'text' || type === 'password') && (
-                                    <input
-                                        type={type}
-                                        id={id}
-                                        className="px-4 py-2 border border-[#B1B7D6] focus:border-[#B1B7D6] focus:outline-none h-[56px] rounded-[10px]"
-                                    />
-                                )}
+                                <input
+                                    type={type}
+                                    id={id}
+                                    className="px-4 py-2 border border-[#B1B7D6] focus:border-[#B1B7D6] focus:outline-none h-[56px] rounded-[10px]"
+                                />
                                 {error && (
                                     <div className='text-danger text-base font-normal mt-3'>
                                         {error}
@@ -179,5 +89,6 @@ const Form: React.FC = () => {
 };
 
 export default Form;
+
 
 

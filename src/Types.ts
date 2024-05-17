@@ -34,3 +34,10 @@ export interface IUserResponse {
     flag: string;
     code: string;
 }
+
+export interface IFormField {
+    id: string;
+    label: string;
+    type: string;
+    error?: string | null;
+}

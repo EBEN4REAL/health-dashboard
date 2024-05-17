@@ -10,7 +10,8 @@ module.exports = {
 		},
 		colors: {
 			"theme-gray": "#282828",
-			"danger": "#FF4E4E"
+			"danger": "#FF4E4E",
+			"gray-level-1": "#B1B7D6"
 		},
 		extend: {
 			fontFamily: {
