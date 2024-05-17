@@ -1,3 +1,4 @@
+import { IUserResponse } from "~/Types";
 
 export async function fetchCountries(): Promise<string[]> {
     try {
@@ -5,10 +6,23 @@ export async function fetchCountries(): Promise<string[]> {
         if (!response.ok) {
             throw new Error('Failed to fetch countries');
         }
-        const data = await response.json();
-        const countryNames = data.map((country: { name: { common: string; }; }) => country.name.common);
-        return countryNames;
+        return await response.json();
     } catch (error) {
         throw new Error('Failed to fetch countries');
+    }
+}
+
+
+
+export async function getUserCountry(): Promise<IUserResponse> {
+    try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) {
+            throw new Error('Failed to fetch user country');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new Error('Failed to fetch user country details');
     }
 }
