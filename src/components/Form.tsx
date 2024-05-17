@@ -13,7 +13,7 @@ const Form: React.FC = () => {
         { id: "password", label: "Password", type: "password", error: "Password must be at least 12 characters" }
     ]
 
-    const [fields, setFields] = useState<IFormField[]>(formFields)
+    const [fields, _] = useState<IFormField[]>(formFields)
 
     return (
         <div className=" lg:w-1/2  w-full   min-h-screen bg-[#F8F8FB] md:flex-row">
@@ -56,7 +56,7 @@ const Form: React.FC = () => {
                             </button>
                         </div>
                         <div className="font-normal text-sm text-theme-gray">
-                            By clicking “Start Application“, I agree to Mercury’s Terms of Use, Privacy Policy and to receive electronic communication about my accounts and services per Mercury’s Electronic Communications Agreement, and acknowledge receipt of Mercury’s USA PATRIOT Act disclosure.
+                            By clicking “Start Application“, I agree to Mercury’s <span className='underline'>Terms of Use</span>, <span className='underline'>Privacy Policy</span> and to receive electronic communication about my accounts and services per <span className='underline'>Mercury’s Electronic Communications Agreement</span>, and acknowledge receipt of <span className='underline'>Mercury’s USA PATRIOT Act disclosure</span>.
                         </div>
                     </form>
                 </div>
