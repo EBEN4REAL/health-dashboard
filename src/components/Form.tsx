@@ -20,7 +20,7 @@ const Form: React.FC = () => {
         { id: "password", label: "Password", type: "password", error: "Password must be at least 12 characters" }
     ];
 
-    const [fields, setFields] = useState<IFormField[]>(formFields);
+    const [fields, _] = useState<IFormField[]>(formFields);
     const [countries, setCountries] = useState<string[]>([]);
 
     useEffect(() => {
