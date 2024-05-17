@@ -72,10 +72,11 @@ const Form: React.FC = () => {
         const loadCountriesAndUserCountry = async () => {
             try {
                 const countriesData = await fetchCountries();
+
                 const countryOptions = countriesData.map((country: any) => ({
                     value: country.cca2,
                     label: country.name.common,
-                    flag: country.flags.svg,
+                    flag: country.flags.svg, 
                     code: country.cca2,
                 }));
 
@@ -84,9 +85,11 @@ const Form: React.FC = () => {
                 const userCountryResponse: IUserResponse = await getUserCountry();
                 const userCountryCode = userCountryResponse.country;
                 const userCountry = countryOptions.find((country) => country.code === userCountryCode);
+
                 if (userCountry) {
                     setSelectedCountry(userCountry);
                 }
+
             } catch (error) {
                 console.error('Error fetching countries or user location:', error);
             }
