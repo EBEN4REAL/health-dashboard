@@ -87,7 +87,7 @@ export const CustomInputWithCountry: React.FC = () => {
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="Business name"
-                className="flex-grow px-4 mr-1 focus:ring-0 focus:outline-none rounded-l-[10px] h-full border-r border-r-gray-level-1"
+                className="flex-grow px-4 mr-1 focus:ring-0 focus:outline-none rounded-l-[10px] h-full border-r border-r-gray-level-1 rounded-tr-none rounded-br-none"
             />
             <Select
                 options={countries}
