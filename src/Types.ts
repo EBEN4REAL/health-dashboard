@@ -1,43 +1,59 @@
-export interface IUserResponse {
-    ip: string
-    network: string
-    version: string
-    city: string
-    region: string
-    region_code: string
-    country: string
-    country_name: string
-    country_code: string
-    country_code_iso3: string
-    country_capital: string
-    country_tld: string
-    continent_code: string
-    in_eu: boolean
-    postal: any
-    latitude: number
-    longitude: number
-    timezone: string
-    utc_offset: string
-    country_calling_code: string
-    currency: string
-    currency_name: string
-    languages: string
-    country_area: number
-    country_population: number
-    asn: string
-    org: string
-  }
-  
-  export interface ICountryOption {
-    value: string;
-    label: string;
-    flag: string;
-    code: string;
+export interface IPatient {
+  name: string
+  gender: string
+  age: number
+  profile_picture: string
+  date_of_birth: string
+  phone_number: string
+  emergency_contact: string
+  insurance_type: string
+  diagnosis_history: DiagnosisHistory[]
+  diagnostic_list: DiagnosticList[]
+  lab_results: string[],
+  active?: boolean
 }
 
-export interface IFormField {
-    id: string;
-    label: string;
-    type: string;
-    error?: string | null;
+export interface DiagnosisHistory {
+  month: string
+  year: number
+  blood_pressure: BloodPressure
+  heart_rate: HeartRate
+  respiratory_rate: RespiratoryRate
+  temperature: Temperature
+}
+
+export interface BloodPressure {
+  systolic: Systolic
+  diastolic: Diastolic
+}
+
+export interface Systolic {
+  value: number
+  levels: string
+}
+
+export interface Diastolic {
+  value: number
+  levels: string
+}
+
+export interface HeartRate {
+  value: number
+  levels: string
+}
+
+export interface RespiratoryRate {
+  value: number
+  levels: string
+}
+
+export interface Temperature {
+  value: number
+  levels: string
+}
+
+export interface DiagnosticList {
+  name: string
+  description: string
+  status: string
 }

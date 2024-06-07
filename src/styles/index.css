@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "DM Sans", sans-serif;
+	font-family: "Manrope", sans-serif;
 }
 
 .text-white {
@@ -22,34 +22,30 @@
 			rgba(244, 231, 244, 1));
 }
 
-/** React select styles **/
-.css-1xc3v61-indicatorContainer {
-	align-items: center;
+/* Scroll bar */
+::-webkit-scrollbar {
+	width: 6px;
 }
 
-.css-1u9des2-indicatorSeparator {
-	background: transparent !important;
-	padding-left: 5px !important;
+/* Track */
+::-webkit-scrollbar-track {
+	background: #E3E4E6;
+	;
 }
 
-.css-1wy0on6 {
-	border-left: 1px solid #B1B7D6 !important;
-}
-.react-select__value-container{
-	display: none !important;
-}
-.css-1nmdiq5-menu{
-	width: 200px !important;
-	right: 0 !important;
-}
-.css-1arx8z6-indicatorContainer{
-	padding: 3px !important;
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #072635;
+	border-radius: 3px;
 }
 
-.css-13cymwt-control {
-    background-color: transparent !important;
-	border: none !important;
+/* Table */
+table th:first-child {
+	border-top-left-radius: 24px;
+	border-bottom-left-radius: 24px;
 }
-.css-1wy0on6 {
-	border-left: none !important;
+
+table th:last-child {
+	border-top-right-radius: 24px;
+	border-bottom-right-radius: 24px;
 }
